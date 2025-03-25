@@ -4,8 +4,6 @@ import './App.css';
 import { Button, Form } from 'react-bootstrap';
 import { Route, Link, Routes } from 'react-router-dom';
 import { BasicAssessment } from './components/BasicAssessment';
-import { DetailedAssessment } from './components/DetailedAssessment';
-
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
 let keyData = "";
 const saveKeyData = "MYKEY";
@@ -34,12 +32,8 @@ function App() {
       <Link to="/basic-assessment">
           <button>Basic Career Assessment</button>
         </Link>
-        <Link to="/detailed-assessment">
-          <button>Detailed Career Assessment</button>
-        </Link>
       <Routes>
         <Route path="/basic-assessment" element={<BasicAssessment />} />
-        <Route path="/detailed-assessment" element={<DetailedAssessment />} />
       </Routes>
       </header>
       <Form>
