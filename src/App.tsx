@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import { Button, Form } from 'react-bootstrap';
+import { Route, Link, Routes } from 'react-router-dom';
+import { BasicAssessment } from './components/BasicAssessment';
+import { DetailedAssessment } from './components/DetailedAssessment';
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
 let keyData = "";
@@ -27,18 +30,17 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload. David Thissen, Nathan Graddon, Matthew Williams, Felix Benz, Ryan Padrone
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>CISC275 Career Assessment</h1>
+      <Link to="/basic-assessment">
+          <button>Basic Career Assessment</button>
+        </Link>
+        <Link to="/detailed-assessment">
+          <button>Detailed Career Assessment</button>
+        </Link>
+      <Routes>
+        <Route path="/basic-assessment" element={<BasicAssessment />} />
+        <Route path="/detailed-assessment" element={<DetailedAssessment />} />
+      </Routes>
       </header>
       <Form>
         <Form.Label>API Key:</Form.Label>
