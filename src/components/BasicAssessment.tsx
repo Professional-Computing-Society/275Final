@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Button } from "react-bootstrap";
-import { Question } from "../interfaces/question";
+// import { Button } from "react-bootstrap";
+// import { Question } from "../interfaces/question";
 
 const questions = [
     {
