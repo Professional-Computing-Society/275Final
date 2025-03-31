@@ -12,7 +12,7 @@ const questions = [
         options: ["When faced with a challenge", "When helping others", "When experimenting freely", "When everything is organized", "When you can let your imagination run free"]
     },
 ];
-// const answers = [];
+//const answers = [];
 
 export function BasicAssessment(): React.JSX.Element {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
