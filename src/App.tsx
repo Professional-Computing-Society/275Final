@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 // import logo from './logo.svg';
+import { DetailedAssessment } from './components/DetailedAssessment';
 import './App.css';
 import { Button, Form } from 'react-bootstrap';
 import { Route, Link, Routes, useLocation } from 'react-router-dom';
@@ -30,12 +31,19 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>CISC275 Career Assessment</h1>
-      {location.pathname !== "/basic-assessment" && (
-      <Link to="/basic-assessment">
-          <button>Basic Career Assessment</button>
-        </Link>)}
+        {!location.pathname.includes("assessment") && (
+  <>
+    <Link to="/basic-assessment">
+      <button>Basic Career Assessment</button>
+    </Link>
+    <Link to="/detailed-assessment">
+      <button>Detailed Career Assessment</button>
+    </Link>
+            </>
+          )}
       <Routes>
         <Route path="/basic-assessment" element={<BasicAssessment />} />
+        <Route path="/detailed-assessment" element={<DetailedAssessment />} />
       </Routes>
       </header>
       <Form>
