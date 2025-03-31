@@ -34,11 +34,17 @@ function App() {
         {!location.pathname.includes("assessment") && (
   <>
     <Link to="/basic-assessment">
-      <button>Basic Career Assessment</button>
+      <button className="cool-button">Basic Career Assessment</button>
     </Link>
+    <p style={{fontSize: "0.9rem", border:"2px solid #ccc", borderRadius: "20px",maxWidth: "600px", marginTop: "10px"}}>
+      This Basic career assessment is meant to help identify your work style and problem-solving preferences to guide you toward general career paths that fit your personality. 
+    </p>
     <Link to="/detailed-assessment">
-      <button>Detailed Career Assessment</button>
+      <button className="cool-button">Detailed Career Assessment</button>
     </Link>
+    <p style={{fontSize: "0.9rem", border:"2px solid #ccc", borderRadius: "20px",maxWidth: "600px", marginTop: "10px"}}>
+      This detailed career assessment is meant to explore your preferneces, motivations, and decision-making style to help identify the right careers that align with your strengthsand interests.
+    </p>
             </>
           )}
       <Routes>
