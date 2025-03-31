@@ -20,6 +20,9 @@ export function BasicAssessment(): React.JSX.Element {
     
     function submitQuestion(option: string) {
         setAnswers([...answers, option]);
+        if(currentQuestionIndex < questions.length -1) {
+            setCurrentQuestionIndex(currentQuestionIndex+1);
+        }
     }
 
     return (
