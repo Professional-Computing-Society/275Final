@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+button {
+  display: block;
+  margin: 10px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+h1 {
+  position: absolute;
+  padding: 20px;
+  top: 0;
+  font-weight: bold;
+}
