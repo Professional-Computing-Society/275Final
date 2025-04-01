@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ProgressBar } from "./ProgressBar"
 
 const questions = [
     {
@@ -62,6 +63,7 @@ export function BasicAssessment(): React.JSX.Element {
                             {option}
                         </button>
                     ))}
+                    <ProgressBar current={currentQuestionIndex } total={questions.length} />
                 </>
             ) : (
                 <div
