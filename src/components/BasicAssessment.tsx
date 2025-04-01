@@ -21,7 +21,16 @@ const questions = [
     {
         body: "What makes you excited?",
         options: ["Trying new things", "Helping someone", "Finishing a project", "Learning something cool"]
+    },
+    {
+        body: "What kind of projects excite you the most?",
+        options: ["Group projects", "Solo challenges", "Creative builds", "Problem-solving tasks"]
+    },
+    {
+        body: "How do you handle mistakes or setbacks?",
+        options: ["Learn and try again", "Ask for help", "Look for creative alternatives", "Pause and reflect before continuing"]
     }
+    
 ];
 
 export function BasicAssessment(): React.JSX.Element {
