@@ -26,25 +26,60 @@ const questions = [
 export function DetailedAssessment(): React.JSX.Element {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [answers, setAnswers] = useState<string[]>([]);
+    const [isComplete, setIsComplete] = useState(false);
 
     function submitQuestion(option: string) {
-        setAnswers([...answers, option]);
+        const updatedAnswers = [...answers, option];
+        setAnswers(updatedAnswers);
+
         if (currentQuestionIndex < questions.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
         } else {
-            alert("Assessment complete! Thank you for your responses.");
-            console.log("Detailed Answers:", answers);
+            setIsComplete(true);
+            console.log("Detailed Answers:", updatedAnswers);
         }
     }
 
     return (
-        <div>
-            <h2>{questions[currentQuestionIndex].body}</h2>
-            {questions[currentQuestionIndex].options.map((option, index) => (
-                <button key={index} onClick={() => submitQuestion(option)}>
-                    {option}
-                </button>
-            ))}
+        <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+            {!isComplete ? (
+                <>
+                    <h2>{questions[currentQuestionIndex].body}</h2>
+                    {questions[currentQuestionIndex].options.map((option, index) => (
+                        <button
+                            key={index}
+                            onClick={() => submitQuestion(option)}
+                            style={{
+                                display: "block",
+                                margin: "10px 0",
+                                padding: "10px 15px",
+                                border: "1px solid #ccc",
+                                borderRadius: "5px",
+                                cursor: "pointer",
+                                backgroundColor: "#f0f0f0"
+                            }}
+                        >
+                            {option}
+                        </button>
+                    ))}
+                </>
+            ) : (
+                <div
+                    style={{
+                        border: "2px solid #4CAF50",
+                        borderRadius: "8px",
+                        padding: "20px",
+                        backgroundColor: "#e6ffe6",
+                        color: "#2d572c",
+                        textAlign: "center",
+                        maxWidth: "500px",
+                        margin: "0 auto"
+                    }}
+                >
+                    <h3>Assessment complete!</h3>
+                    <p>Thank you for your responses.</p>
+                </div>
+            )}
         </div>
     );
 }
