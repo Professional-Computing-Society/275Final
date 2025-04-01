@@ -21,7 +21,16 @@ const questions = [
     {
         body: "Which activity would you choose for a free afternoon?",
         options: ["Building something", "Volunteering", "Painting or designing", "Reading or researching", "Organizing a group event"]
+    },
+    {
+        body: "What role do you usually take in a team setting?",
+        options: ["Leader or organizer", "Idea generator", "Supporter or helper", "Researcher or analyst", "Hands-on contributor"]
+    },
+    {
+        body: "Which skill would you most like to develop further?",
+        options: ["Leadership", "Technical expertise", "Creative expression", "Empathy and communication", "Strategic thinking"]
     }
+    
 ];
 
 export function DetailedAssessment(): React.JSX.Element {
