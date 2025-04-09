@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { ProgressBar } from "./ProgressBar"
 
 const questions = [
@@ -36,18 +36,7 @@ const questions = [
 export function DetailedAssessment(): React.JSX.Element {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [answers, setAnswers] = useState<string[]>([]);
-    const [questions, setQuestions] = useState<any[]>([]); // Set as any for simplicity
     const [isComplete, setIsComplete] = useState(false);
-
-    useEffect(() => {
-        // Fetch the questions from the txt file (assuming it's in the public folder)
-        fetch("/questions.txt")
-            .then(response => response.json())
-            .then(data => {
-                setQuestions(data.questions); // Set questions to the parsed file content
-            })
-            .catch(error => console.error("Error loading questions:", error));
-    }, []);
 
     function submitQuestion(option: string) {
         const updatedAnswers = [...answers, option];
