@@ -51,42 +51,29 @@ export function DetailedAssessment(): React.JSX.Element {
     }
 
     return (
-        <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-            {!isComplete ? (
-                <>
-                    <h2>{questions[currentQuestionIndex].body}</h2>
-                    {questions[currentQuestionIndex].options.map((option, index) => (
-                        <button
-                            key={index}
-                            onClick={() => submitQuestion(option)}
-                            style={{
-                                display: "block",
-                                margin: "10px 0",
-                                padding: "10px 15px",
-                                border: "1px solid #ccc",
-                                borderRadius: "5px",
-                                cursor: "pointer",
-                                backgroundColor: "#f0f0f0"
-                            }}
-                        >
-                            {option}
-                        </button>
-                    ))}
+        <div className="assessment">
+      {!isComplete ? (
+        <>
+          <div className="question">
+            <h2>{questions[currentQuestionIndex]?.body}</h2>
+            <div className="options">
+              {questions[currentQuestionIndex]?.options.map((option, index) => (
+                <button
+                  key={index}
+                  onClick={() => submitQuestion(option)}
+                  className="option-button"
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          </div>
                     <ProgressBar current={currentQuestionIndex } total={questions.length} />
                 </>
             ) : (
                 
                 <div
-                    style={{
-                        border: "2px solid #4CAF50",
-                        borderRadius: "8px",
-                        padding: "20px",
-                        backgroundColor: "#e6ffe6",
-                        color: "#2d572c",
-                        textAlign: "center",
-                        maxWidth: "500px",
-                        margin: "0 auto"
-                    }}
+                    className="result-box"
                 >
                     <h3>Assessment complete!</h3>
                     <p>Thank you for your responses.</p>

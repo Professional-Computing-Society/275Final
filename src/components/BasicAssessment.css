@@ -1,0 +1,70 @@
+/* BasicAssessment.css */
+
+/* Container for the assessment */
+.assessment-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Question and answer styling */
+.question-container h2 {
+    font-size: 35px;
+    color: White;
+    text-align: center;
+}
+
+.option-button {
+    display: block;
+    margin: 10px 0;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    width: 100%;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.option-button:hover {
+    background-color: #ddd;
+}
+
+/* Progress bar container styling */
+.progress-bar-container {
+    width: 100%;
+    background: #e0e0e0;
+    height: 8px;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: #4caf50;
+    border-radius: 4px;
+    transition: width 0.3s ease-in-out;
+}
+
+/* Completion message styling */
+.result-box {
+    border: 2px solid #28a745;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #eaffea;
+    color: #155724;
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.result-box h3 {
+    font-size: 28px;
+    color: #28a745;
+}
+
+.result-box p {
+    font-size: 18px;
+    color: #333;
+}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { ProgressBar } from "./ProgressBar"
+import { ProgressBar } from "./ProgressBar";
+import "./BasicAssessment.css";  
 
 const questions = [
     {
@@ -30,7 +31,6 @@ const questions = [
         body: "How do you handle mistakes or setbacks?",
         options: ["Learn and try again", "Ask for help", "Look for creative alternatives", "Pause and reflect before continuing"]
     }
-    
 ];
 
 export function BasicAssessment(): React.JSX.Element {
@@ -51,42 +51,25 @@ export function BasicAssessment(): React.JSX.Element {
     }
 
     return (
-        <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+        <div className="assessment-container">
             {!isComplete ? (
                 <>
-                    <h2>{questions[currentQuestionIndex].body}</h2>
-                    {questions[currentQuestionIndex].options.map((option, index) => (
-                        <button
-                            key={index}
-                            onClick={() => submitQuestion(option)}
-                            style={{
-                                display: "block",
-                                margin: "10px 0",
-                                padding: "10px 15px",
-                                border: "1px solid #ccc",
-                                borderRadius: "5px",
-                                cursor: "pointer",
-                                backgroundColor: "#f9f9f9"
-                            }}
-                        >
-                            {option}
-                        </button>
-                    ))}
-                    <ProgressBar current={currentQuestionIndex } total={questions.length} />
+                    <div className="question-container">
+                        <h2>{questions[currentQuestionIndex].body}</h2>
+                        {questions[currentQuestionIndex].options.map((option, index) => (
+                            <button
+                                key={index}
+                                onClick={() => submitQuestion(option)}
+                                className="option-button"
+                            >
+                                {option}
+                            </button>
+                        ))}
+                    </div>
+                    <ProgressBar current={currentQuestionIndex} total={questions.length} />
                 </>
             ) : (
-                <div
-                    style={{
-                        border: "2px solid #28a745",
-                        borderRadius: "8px",
-                        padding: "20px",
-                        backgroundColor: "#eaffea",
-                        color: "#155724",
-                        textAlign: "center",
-                        maxWidth: "500px",
-                        margin: "0 auto"
-                    }}
-                >
+                <div className="result-box">
                     <h3>You're all done!</h3>
                     <p>Thanks for completing the basic questions.</p>
                 </div>
