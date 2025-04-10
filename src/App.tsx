@@ -80,6 +80,9 @@ function App() {
         <br></br>
         <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
       </Form>
+      <p style={{ fontSize: "0.8rem", color: "#ccc", marginTop: "10px" }}>
+  Your API key is stored only in your browser and never shared. If the assessments aren't working, double-check your key.
+    </p>
     </div>
   );
 }
