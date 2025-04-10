@@ -31,12 +31,28 @@ function App() {
         <h1>CISC275 Career Assessment</h1>
         {/* Add back to home button when on assessment routes */}
         {location.pathname.includes("assessment") && (
+        <div style={{ position: "absolute", top: "10px", right: "10px", display: "flex", gap: "10px" }}>
           <Link to="/">
-            <button className="cool-button" style={{position: "absolute", top: "10px", right: "10px"}}>
+            <button className="cool-button">
               Back to Home
             </button>
           </Link>
-        )}
+          {location.pathname === "/basic-assessment" && (
+            <Link to="/detailed-assessment">
+              <button className="cool-button">
+                Go to Detailed
+              </button>
+            </Link>
+          )}
+          {location.pathname === "/detailed-assessment" && (
+            <Link to="/basic-assessment">
+              <button className="cool-button">
+                Go to Basic
+              </button>
+            </Link>
+          )}
+        </div>
+      )}
         {!location.pathname.includes("assessment") && (
           <>
             <Link to="/basic-assessment">
@@ -49,7 +65,7 @@ function App() {
               <button className="cool-button">Detailed Career Assessment</button>
             </Link>
             <p style={{fontSize: "0.9rem", border:"2px solid #ccc", borderRadius: "20px",maxWidth: "600px", marginTop: "10px"}}>
-              This detailed career assessment is meant to explore your preferneces, motivations, and decision-making style to help identify the right careers that align with your strengthsand interests.
+              This detailed career assessment is meant to explore your preferneces, motivations, and decision-making style to help identify the right careers that align with your strengths and interests.
             </p>
           </>
         )}
