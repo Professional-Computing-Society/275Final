@@ -51,19 +51,23 @@ export function DetailedAssessment(): React.JSX.Element {
     }
 
     return (
-        <div className="basic-assessment">
-            {!isComplete ? (
-                <>
-                    <h2>{questions[currentQuestionIndex].body}</h2>
-                    {questions[currentQuestionIndex].options.map((option, index) => (
-                        <button
-                            key={index}
-                            onClick={() => submitQuestion(option)}
-                            className="option-button"
-                        >
-                            {option}
-                        </button>
-                    ))}
+        <div className="assessment">
+      {!isComplete ? (
+        <>
+          <div className="question">
+            <h2>{questions[currentQuestionIndex]?.body}</h2>
+            <div className="options">
+              {questions[currentQuestionIndex]?.options.map((option, index) => (
+                <button
+                  key={index}
+                  onClick={() => submitQuestion(option)}
+                  className="option-button"
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          </div>
                     <ProgressBar current={currentQuestionIndex } total={questions.length} />
                 </>
             ) : (
