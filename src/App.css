@@ -72,11 +72,11 @@ h1 {
 }
 
 .cool-button {
-  background: rgba(255, 255, 255, 0.78);
-  border: 2px solid rgba(22, 117, 250, 0.5);
+  background: rgba(0, 0, 0, 0.42);
+  border: 2px solid rgb(255, 255, 255);
   border-radius: 16px;
   padding: 12px 24px;
-  color: #1675fa;
+  color:rgb(255, 255, 255);
   font-size: 16px;
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 12px rgba(22, 117, 250, 0.05);
@@ -87,8 +87,8 @@ h1 {
 }
 
 .cool-button:hover {
-  background: rgb(255, 255, 255);
-  box-shadow: 0 0 18px rgb(1, 65, 255), 0 0 8px rgb(255, 255, 255);
+  background: rgb(0, 0, 0);
+  box-shadow: 0 0 18px rgb(1, 153, 255), 0 0 8px rgb(255, 255, 255);
   transform: translateY(-2px) scale(1.03);
 }
 
@@ -100,9 +100,9 @@ h1 {
 }
 
 .fancy-title {
-  font-size: 3rem;
+  font-size: 3.2rem;
   font-weight: bold;
-  background: linear-gradient(90deg,rgb(246, 249, 250), rgba(0, 106, 255, 0.9));
+  background: linear-gradient(90deg,rgb(246, 249, 250), rgb(166, 227, 255));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
@@ -135,14 +135,15 @@ h1 {
 
 .description-box {
   font-size: 0.95rem;
-  border: 2px solid rgba(22, 117, 250, 0.3);
+  border: 2px solid rgb(5, 134, 255);
   border-radius: 16px;
   padding: 20px;
   margin-top: 15px;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgb(255, 255, 255);
   backdrop-filter: blur(5px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: black;
 }
 
 .description-box:hover {
@@ -155,13 +156,14 @@ h1 {
   position: absolute;
   top: 35%;
   left: 50%;
+  border: 3px solid rgb(255, 255, 255);
   transform: translateX(-50%);
   max-width: 600px;
   text-align: center;
-  background: linear-gradient(145deg,rgb(0, 179, 255),rgba(4, 83, 148, 0.76));
+  background: linear-gradient(145deg,rgba(0, 0, 0, 0.4),rgb(67, 161, 255));
   padding: 30px 35px;
   border-radius: 20px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 30px rgba(255, 255, 255, 0.15);
   font-size: 1.5rem;
   color:rgb(255, 255, 255);
   z-index: 2;
