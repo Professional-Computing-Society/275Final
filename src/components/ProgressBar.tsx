@@ -27,7 +27,7 @@ export function ProgressBar({ current, total }: ProgressBarProps): React.JSX.Ele
                     }}
                 />
             </div>
-            <p style={{ fontSize: "0.9rem", marginTop: "5px" }}>
+            <p style={{ fontSize: "0.9rem", marginTop: "5px", color: "white" }}>
                 {current} of {total} questions answered
             </p>
         </div>

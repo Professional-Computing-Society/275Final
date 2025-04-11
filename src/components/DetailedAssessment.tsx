@@ -51,7 +51,7 @@ export function DetailedAssessment(): React.JSX.Element {
     }
 
     return (
-        <div className="assessment">
+    <div className="assessment" style={{ color: "white" }}>
       {!isComplete ? (
         <>
           <div className="question">
