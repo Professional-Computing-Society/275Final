@@ -96,8 +96,6 @@ h1 {
   box-shadow: 0 0 22px rgba(22, 117, 250, 0.5);
 }
 
-
-
 .fancy-title {
   font-size: 3rem;
   font-weight: bold;
@@ -112,7 +110,6 @@ h1 {
 .fancy-title:hover {
   transform: scale(1.05);
 }
-
 
 .homepage-layout {
   position: absolute;
