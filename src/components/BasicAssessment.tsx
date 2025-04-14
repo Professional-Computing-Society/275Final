@@ -30,6 +30,18 @@ const questions = [
     {
         body: "How do you handle mistakes or setbacks?",
         options: ["Learn and try again", "Ask for help", "Look for creative alternatives", "Pause and reflect before continuing"]
+    },
+    {
+        body: "What kind of challenges do you enjoy?",
+        options: ["Hands-on tasks", "Helping others solve issues", "Coming up with ideas", "Solving tricky problems"]
+    },
+    {
+        body: "Where do you feel most productive?",
+        options: ["In a workshop or lab", "In conversations with others", "In a creative space", "In a quiet place to think"]
+    },
+    {
+        body: "Which tool would you pick for a school project?",
+        options: ["Screwdriver", "Whiteboard marker", "Paintbrush", "Calculator"]
     }
 ];
 
