@@ -5,6 +5,10 @@ import { Route, Link, Routes, useLocation } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 import './App.css';
 
+// Chat GPT function
+import { chat } from './chat';
+
+
 // Local storage and API key setup
 let keyData = "";
 const saveKeyData = "MYKEY";
@@ -17,9 +21,16 @@ function App() {
   const [key, setKey] = useState<string>(keyData);
   const location = useLocation();
 
-  function handleSubmit() {
+  async function handleSubmit() {
     localStorage.setItem(saveKeyData, JSON.stringify(key));
-    window.location.reload();
+  
+    try {
+      const result = await chat("Say hello!");
+      alert(result);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to connect with the API. Please check your key.");
+    }
   }
 
   function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
