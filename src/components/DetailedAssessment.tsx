@@ -29,6 +29,18 @@ const questions = [
     {
         body: "Which skill would you most like to develop further?",
         options: ["Leadership", "Technical expertise", "Creative expression", "Empathy and communication", "Strategic thinking"]
+    },
+    {
+        body: "How do you approach unfamiliar tasks?",
+        options: ["Jump in and experiment", "Ask for guidance", "Research thoroughly", "Try to connect it to something I know", "Break it into smaller parts"]
+    },
+    {
+        body: "What kind of work gives you the most energy?",
+        options: ["Creative brainstorming", "Helping others improve", "Building or fixing something", "Analyzing complex data", "Organizing and managing"]
+    },
+    {
+        body: "When starting a new project, whats your first instinct?",
+        options: ["Visualize the result", "Make a checklist", "Ask who Im working with", "Explore what's possible", "Define the problem"]
     }
     
 ];
