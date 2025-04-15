@@ -17,7 +17,7 @@
 
 .option-button {
     display: block;
-    margin: 10px 0;
+    margin: 4px 0;
     padding: 10px 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -99,7 +99,7 @@
     margin-top: 1.5em;
     margin-bottom: 0.8em;
     font-weight: 600;
-    color: #28a745;
+    color: #1a73e8;
 }
 
 .chatgpt-response h1 {
@@ -169,5 +169,5 @@
 
 .chatgpt-response strong {
     font-weight: 600;
-    color: #155724;
+    color: #333;
 }

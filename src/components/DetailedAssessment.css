@@ -33,7 +33,7 @@
   .options {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 6px;
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
@@ -41,7 +41,7 @@
 
 .option-button {
     display: block;
-    margin: 10px 0;
+    margin: 4px 0;
     padding: 10px 15px;
     border: 1px solid #ccc;
     border-radius: 5px;

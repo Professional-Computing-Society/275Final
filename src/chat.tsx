@@ -37,9 +37,10 @@ export async function chat(answers: string[], assessmentType: string = "basic") 
       Keep the tone warm, supportive, and motivational.
       
       IMPORTANT: Format your response using proper markdown:
-      - Use a clear heading for the summary
-      - Use bullet points (*) to highlight key strengths or preferences
-      - Use bold text (**text**) for emphasis on important points
+      - DO NOT use any heading that says "Career Exploration Summary" or similar
+      - Start with a simple introduction paragraph without a heading
+      - Use bullet points (*) to highlight key strengths or preferences 
+      - Use bold text (**text**) sparingly for emphasis on important points
       - Keep the content concise but well-organized
     `;
 
@@ -55,7 +56,7 @@ export async function chat(answers: string[], assessmentType: string = "basic") 
       Here are the answers to a basic career quiz:
       ${answers.join(", ")}
 
-      Based on these answers, what types of careers or work styles might this person enjoy?
+      Based on these answers, what types of careers or work styles might this person enjoy? Keep your response short and focused on their key strengths.
     `;
 
   try {
