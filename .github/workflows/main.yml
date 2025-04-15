@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          #cache: "npm"
       - id: get-repo-values
         run: |
           url=https://$(echo "${{github.repository}}" | sed "s/\//.github.io\//")
