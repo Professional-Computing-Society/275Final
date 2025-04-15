@@ -6,7 +6,6 @@ import { Button, Form } from 'react-bootstrap';
 import './App.css';
 
 // Chat GPT function
-import { chat } from './chat';
 
 
 // Local storage and API key setup
