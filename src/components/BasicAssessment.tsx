@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ProgressBar } from "./ProgressBar";
-import "./BasicAssessment.css";  
+import "./BasicAssessment.css";
+import { chat } from "../chat";  
 
 const questions = [
     {
@@ -49,6 +50,9 @@ export function BasicAssessment(): React.JSX.Element {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [answers, setAnswers] = useState<string[]>([]);
     const [isComplete, setIsComplete] = useState(false);
+    const [gptResponse, setGptResponse] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     function submitQuestion(option: string) {
         const updatedAnswers = [...answers, option];
@@ -58,10 +62,32 @@ export function BasicAssessment(): React.JSX.Element {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
         } else {
             setIsComplete(true);
+            generateCareerReport(updatedAnswers);
             console.log("Basic Assessment Answers:", updatedAnswers);
         }
     }
 
+    async function generateCareerReport(answers: string[]) {
+        setLoading(true);
+        setError(null);
+    
+        const prompt = `
+          Based on the following career assessment answers:
+          ${answers.join(", ")}
+    
+          Write a short, friendly paragraph suggesting what types of careers might suit this person based on their preferences and learning styles. Use plain language, be specific, and try to capture general strengths and work environments they might enjoy.
+        `;
+    
+        try {
+            const response = await chat(answers);
+            setGptResponse(response || "Sorry, something went wrong.");
+        } catch (err: any) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    }
+    
     return (
         <div className="assessment-container">
             {!isComplete ? (
@@ -81,9 +107,20 @@ export function BasicAssessment(): React.JSX.Element {
                     <ProgressBar current={currentQuestionIndex} total={questions.length} />
                 </>
             ) : (
-                <div className="result-box">
-                    <h3>You're all done!</h3>
-                    <p>Thanks for completing the basic questions.</p>
+            <div className="result-box">
+            <h3>You're all done!</h3>
+            {loading ? (
+                <p>Generating your career insight...</p>
+            ) : error ? (
+                <p style={{ color: 'red' }}>Error: {error}</p>
+            ) : (
+                <>
+                    <p>Here’s your personalized career insight:</p>
+                    <div className="chatgpt-response">
+                        <p>{gptResponse}</p>
+                    </div>
+                </>
+                    )}
                 </div>
             )}
         </div>

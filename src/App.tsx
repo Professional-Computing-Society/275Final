@@ -24,13 +24,13 @@ function App() {
   async function handleSubmit() {
     localStorage.setItem(saveKeyData, JSON.stringify(key));
   
-    try {
-      const result = await chat("Say hello!");
-      alert(result);
-    } catch (err) {
-      console.error(err);
-      alert("Failed to connect with the API. Please check your key.");
-    }
+    // try {
+    //   const result = await chat("Say hello!");
+    //   alert(result);
+    // } catch (err) {
+    //   console.error(err);
+    //   alert("Failed to connect with the API. Please check your key.");
+    // }
   }
 
   function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
