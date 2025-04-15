@@ -32,12 +32,12 @@ File                     | % Stmts | % Branch | % Funcs | % Lines | Uncovered Li
 -------------------------|---------|----------|---------|---------|-------------------
 All files                |       0 |        0 |       0 |       0 |                   
  src                     |       0 |        0 |       0 |       0 |                   
-  App.tsx                |       0 |        0 |       0 |       0 | 13-40             
-  chat.tsx               |       0 |        0 |       0 |       0 | 3-33              
+  App.tsx                |       0 |        0 |       0 |       0 | 12-39             
+  chat.tsx               |       0 |        0 |       0 |       0 | 3-43              
   index.tsx              |       0 |      100 |     100 |       0 | 8-22              
   reportWebVitals.ts     |       0 |        0 |       0 |       0 | 3-10              
  src/components          |       0 |        0 |       0 |       0 |                   
-  BasicAssessment.tsx    |       0 |        0 |       0 |       0 | 5-74              
+  BasicAssessment.tsx    |       0 |        0 |       0 |       0 | 6-93              
   DetailedAssessment.tsx |       0 |        0 |       0 |       0 | 4-75              
   ProgressBar.tsx        |       0 |      100 |       0 |       0 | 9-11              
  src/interfaces          |       0 |        0 |       0 |       0 |                   
@@ -46,5 +46,5 @@ All files                |       0 |        0 |       0 |       0 |
 Test Suites: 1 failed, 1 total
 Tests:       0 total
 Snapshots:   0 total
-Time:        2.611 s
+Time:        2.753 s
 Ran all test suites.
