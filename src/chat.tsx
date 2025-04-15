@@ -22,10 +22,25 @@ export async function chat(answers: string[], assessmentType: string = "basic") 
       3. 3-5 specific job titles that would suit them particularly well
       4. Potential growth areas they might consider developing
       
-      Be specific, insightful, and personalized. Use a professional yet encouraging tone. Format your response with clear sections.
+      Be specific, insightful, and personalized. Use a professional yet encouraging tone.
+      
+      IMPORTANT: Format your response using proper markdown with clear section headers:
+      - Use ## for main section headings
+      - Use ### for subsection headings
+      - Use bullet points (*) for lists
+      - Use bold text (**text**) for emphasis
+      - Organize the content with clear spacing between sections
     `
     : `
-      You are a helpful and friendly career advisor. Based on a user's quiz answers, your job is to write a short, plain-language summary about the kinds of work environments, tasks, and strengths this person may enjoy. Avoid specific job titles. Instead, focus on general themes like collaboration, creativity, problem-solving, hands-on tasks, etc. Keep the tone warm, supportive, and motivational.
+      You are a helpful and friendly career advisor. Based on a user's quiz answers, your job is to write a short, plain-language summary about the kinds of work environments, tasks, and strengths this person may enjoy. Avoid specific job titles. Instead, focus on general themes like collaboration, creativity, problem-solving, hands-on tasks, etc.
+      
+      Keep the tone warm, supportive, and motivational.
+      
+      IMPORTANT: Format your response using proper markdown:
+      - Use a clear heading for the summary
+      - Use bullet points (*) to highlight key strengths or preferences
+      - Use bold text (**text**) for emphasis on important points
+      - Keep the content concise but well-organized
     `;
 
   // Different user prompts based on assessment type

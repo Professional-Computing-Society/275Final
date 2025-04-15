@@ -4,6 +4,8 @@
 .assessment-container {
     padding: 20px;
     font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 /* Question and answer styling */
@@ -50,21 +52,122 @@
 /* Completion message styling */
 .result-box {
     border: 2px solid #28a745;
-    border-radius: 8px;
-    padding: 20px;
-    background-color: #eaffea;
+    border-radius: 12px;
+    padding: 30px;
+    background-color: #f0fff0;
     color: #155724;
     text-align: center;
-    max-width: 500px;
-    margin: 0 auto;
+    max-width: 800px;
+    margin: 30px auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .result-box h3 {
-    font-size: 28px;
+    font-size: 32px;
     color: #28a745;
+    margin-bottom: 20px;
+    font-weight: 600;
 }
 
 .result-box p {
     font-size: 18px;
+    margin-bottom: 20px;
+    color: #155724;
+}
+
+/* Chatgpt response styling */
+.chatgpt-response {
+    background-color: white;
+    border-radius: 8px;
+    padding: 25px;
+    margin-top: 20px;
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.6;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     color: #333;
+    overflow-y: auto;
+    max-height: 400px;
+}
+
+.chatgpt-response h1, 
+.chatgpt-response h2, 
+.chatgpt-response h3, 
+.chatgpt-response h4, 
+.chatgpt-response h5, 
+.chatgpt-response h6 {
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+    font-weight: 600;
+    color: #28a745;
+}
+
+.chatgpt-response h1 {
+    font-size: 1.8em;
+    border-bottom: 1px solid #eaecef;
+    padding-bottom: 0.3em;
+}
+
+.chatgpt-response h2 {
+    font-size: 1.5em;
+    border-bottom: 1px solid #eaecef;
+    padding-bottom: 0.3em;
+}
+
+.chatgpt-response h3 {
+    font-size: 1.25em;
+}
+
+.chatgpt-response h4 {
+    font-size: 1em;
+}
+
+.chatgpt-response p {
+    margin-bottom: 1em;
+}
+
+.chatgpt-response ul, 
+.chatgpt-response ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+.chatgpt-response li {
+    margin: 0.5em 0;
+}
+
+.chatgpt-response a {
+    color: #0366d6;
+    text-decoration: none;
+}
+
+.chatgpt-response a:hover {
+    text-decoration: underline;
+}
+
+.chatgpt-response code {
+    background: #f6f8fa;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-family: Consolas, Monaco, 'Andale Mono', monospace;
+    font-size: 0.9em;
+}
+
+.chatgpt-response pre {
+    background: #f6f8fa;
+    padding: 1em;
+    border-radius: 3px;
+    overflow-x: auto;
+}
+
+.chatgpt-response blockquote {
+    margin: 1em 0;
+    padding: 0 1em;
+    color: #6a737d;
+    border-left: 0.25em solid #dfe2e5;
+}
+
+.chatgpt-response strong {
+    font-weight: 600;
+    color: #155724;
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ProgressBar } from "./ProgressBar"
 import "./DetailedAssessment.css";
 import { chat } from "../chat";
+import ReactMarkdown from 'react-markdown';
 
 const questions = [
     {
@@ -100,25 +101,25 @@ export function DetailedAssessment(): React.JSX.Element {
               ))}
             </div>
           </div>
-                    <ProgressBar current={currentQuestionIndex} total={questions.length} />
-                </>
+          <ProgressBar current={currentQuestionIndex} total={questions.length} />
+        </>
+      ) : (
+        <div className="result-box">
+            <h3>You're all done!</h3>
+            {loading ? (
+                <p>Generating your detailed career assessment...</p>
+            ) : error ? (
+                <p style={{ color: 'red' }}>Error: {error}</p>
             ) : (
-                <div className="result-box">
-                    <h3>You're all done!</h3>
-                    {loading ? (
-                        <p>Generating your detailed career assessment...</p>
-                    ) : error ? (
-                        <p style={{ color: 'red' }}>Error: {error}</p>
-                    ) : (
-                        <>
-                            <p>Here's your personalized detailed career assessment:</p>
-                            <div className="chatgpt-response">
-                                <p>{gptResponse}</p>
-                            </div>
-                        </>
-                    )}
-                </div>
+                <>
+                    <p>Here's your personalized detailed career assessment:</p>
+                    <div className="chatgpt-response">
+                        <ReactMarkdown>{gptResponse || ""}</ReactMarkdown>
+                    </div>
+                </>
             )}
         </div>
+      )}
+    </div>
     );
 }

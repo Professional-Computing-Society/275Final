@@ -45,7 +45,7 @@ function App() {
 
         {/* Back/Home navigation when inside an assessment */}
         {location.pathname.includes("assessment") && (
-          <div style={{ position: "absolute", top: "10px", right: "10px", display: "flex", gap: "10px" }}>
+          <div className="nav-buttons">
             <Link to="/">
               <button className="cool-button">Back to Home</button>
             </Link>
@@ -59,6 +59,18 @@ function App() {
                 <button className="cool-button">Go to Basic</button>
               </Link>
             )}
+          </div>
+        )}
+
+        {location.pathname === "/basic-assessment" && (
+          <div className="assessment-title">
+            <h2>Basic Career Assessment</h2>
+          </div>
+        )}
+
+        {location.pathname === "/detailed-assessment" && (
+          <div className="assessment-title">
+            <h2>Detailed Career Assessment</h2>
           </div>
         )}
 

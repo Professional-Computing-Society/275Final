@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ProgressBar } from "./ProgressBar";
 import "./BasicAssessment.css";
 import { chat } from "../chat";  
+import ReactMarkdown from 'react-markdown';
 
 const questions = [
     {
@@ -115,9 +116,9 @@ export function BasicAssessment(): React.JSX.Element {
                 <p style={{ color: 'red' }}>Error: {error}</p>
             ) : (
                 <>
-                    <p>Here’s your personalized career insight:</p>
+                    <p>Here's your personalized career insight:</p>
                     <div className="chatgpt-response">
-                        <p>{gptResponse}</p>
+                        <ReactMarkdown>{gptResponse || ""}</ReactMarkdown>
                     </div>
                 </>
                     )}
