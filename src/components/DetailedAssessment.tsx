@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { ProgressBar } from "./ProgressBar"
+import "./DetailedAssessment.css";
+import { chat } from "../chat";
 
 const questions = [
     {
@@ -49,6 +51,9 @@ export function DetailedAssessment(): React.JSX.Element {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [answers, setAnswers] = useState<string[]>([]);
     const [isComplete, setIsComplete] = useState(false);
+    const [gptResponse, setGptResponse] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     function submitQuestion(option: string) {
         const updatedAnswers = [...answers, option];
@@ -58,15 +63,30 @@ export function DetailedAssessment(): React.JSX.Element {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
         } else {
             setIsComplete(true);
+            generateCareerReport(updatedAnswers);
             console.log("Detailed Answers:", updatedAnswers);
         }
     }
 
+    async function generateCareerReport(answers: string[]) {
+        setLoading(true);
+        setError(null);
+    
+        try {
+            const response = await chat(answers, "detailed");
+            setGptResponse(response || "Sorry, something went wrong.");
+        } catch (err: any) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    }
+
     return (
-    <div className="assessment" style={{ color: "white" }}>
+    <div className="assessment-container">
       {!isComplete ? (
         <>
-          <div className="question">
+          <div className="question-container">
             <h2>{questions[currentQuestionIndex]?.body}</h2>
             <div className="options">
               {questions[currentQuestionIndex]?.options.map((option, index) => (
@@ -80,15 +100,23 @@ export function DetailedAssessment(): React.JSX.Element {
               ))}
             </div>
           </div>
-                    <ProgressBar current={currentQuestionIndex } total={questions.length} />
+                    <ProgressBar current={currentQuestionIndex} total={questions.length} />
                 </>
             ) : (
-                
-                <div
-                    className="result-box"
-                >
-                    <h3>Assessment complete!</h3>
-                    <p>Thank you for your responses.</p>
+                <div className="result-box">
+                    <h3>You're all done!</h3>
+                    {loading ? (
+                        <p>Generating your detailed career assessment...</p>
+                    ) : error ? (
+                        <p style={{ color: 'red' }}>Error: {error}</p>
+                    ) : (
+                        <>
+                            <p>Here's your personalized detailed career assessment:</p>
+                            <div className="chatgpt-response">
+                                <p>{gptResponse}</p>
+                            </div>
+                        </>
+                    )}
                 </div>
             )}
         </div>
