@@ -71,13 +71,6 @@ export function BasicAssessment(): React.JSX.Element {
         setLoading(true);
         setError(null);
     
-        const prompt = `
-          Based on the following career assessment answers:
-          ${answers.join(", ")}
-    
-          Write a short, friendly paragraph suggesting what types of careers might suit this person based on their preferences and learning styles. Use plain language, be specific, and try to capture general strengths and work environments they might enjoy.
-        `;
-    
         try {
             const response = await chat(answers);
             setGptResponse(response || "Sorry, something went wrong.");
