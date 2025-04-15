@@ -145,11 +145,21 @@ export function BasicAssessment(): React.JSX.Element {
                     <div className="chatgpt-response">
                         <ReactMarkdown>{gptResponse || ""}</ReactMarkdown>
                     </div>
+                    <div style={{ marginTop: "20px" }}>
+                        <button
+                            onClick={() => {
+                                localStorage.removeItem("basicAssessmentProgress");
+                                window.location.reload();
+                            }}
+                            className="cool-button"
+                        >
+                            Restart Assessment
+                        </button>
+                    </div>
                 </>
                     )}
                 </div>
             )}
         </div>
-    );
-}
+    )}
 
