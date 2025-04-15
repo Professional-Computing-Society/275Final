@@ -3,6 +3,8 @@ import { ProgressBar } from "./ProgressBar"
 import "./DetailedAssessment.css";
 import { chat } from "../chat";
 import ReactMarkdown from 'react-markdown';
+import { useEffect } from "react";
+
 
 const questions = [
     {
@@ -56,18 +58,39 @@ export function DetailedAssessment(): React.JSX.Element {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
+    useEffect(() => {
+        const saved = localStorage.getItem("detailedAssessmentProgress");
+        if (saved) {
+            const { answers, index } = JSON.parse(saved);
+            setAnswers(answers);
+            setCurrentQuestionIndex(index);
+            if (index >= questions.length) {
+                setIsComplete(true);
+                generateCareerReport(answers);
+            }
+        }
+    }, []);
+
     function submitQuestion(option: string) {
         const updatedAnswers = [...answers, option];
+        const newIndex = currentQuestionIndex + 1;
+    
         setAnswers(updatedAnswers);
-
-        if (currentQuestionIndex < questions.length - 1) {
-            setCurrentQuestionIndex(currentQuestionIndex + 1);
-        } else {
+        setCurrentQuestionIndex(newIndex);
+    
+        // Save to localStorage
+        localStorage.setItem("detailedAssessmentProgress", JSON.stringify({
+            answers: updatedAnswers,
+            index: newIndex
+        }));
+    
+        if (newIndex >= questions.length) {
             setIsComplete(true);
             generateCareerReport(updatedAnswers);
-            console.log("Detailed Answers:", updatedAnswers);
+            console.log("Detailed Assessment Answers:", updatedAnswers);
         }
     }
+    
 
     async function generateCareerReport(answers: string[]) {
         setLoading(true);
@@ -99,6 +122,18 @@ export function DetailedAssessment(): React.JSX.Element {
                   {option}
                 </button>
               ))}
+        <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "10px" }}>
+            <button
+                onClick={() => {
+                    localStorage.removeItem("detailedAssessmentProgress");
+                    window.location.reload();
+                }}
+                className="cool-button"
+            >
+                Restart Assessment
+            </button>
+        </div>
+
             </div>
           </div>
           <ProgressBar current={currentQuestionIndex} total={questions.length} />

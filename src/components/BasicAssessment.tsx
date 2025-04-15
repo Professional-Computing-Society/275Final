@@ -3,6 +3,7 @@ import { ProgressBar } from "./ProgressBar";
 import "./BasicAssessment.css";
 import { chat } from "../chat";  
 import ReactMarkdown from 'react-markdown';
+import { useEffect } from "react"; 
 
 const questions = [
     {
@@ -55,18 +56,37 @@ export function BasicAssessment(): React.JSX.Element {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
+    useEffect(() => {
+        const saved = localStorage.getItem("basicAssessmentProgress");
+        if (saved) {
+            const { answers, index } = JSON.parse(saved);
+            setAnswers(answers);
+            setCurrentQuestionIndex(index);
+            if (index >= questions.length) {
+                setIsComplete(true);
+                generateCareerReport(answers);
+            }
+        }
+    }, []);
+
     function submitQuestion(option: string) {
         const updatedAnswers = [...answers, option];
-        setAnswers(updatedAnswers);
+    const newIndex = currentQuestionIndex + 1;
 
-        if (currentQuestionIndex < questions.length - 1) {
-            setCurrentQuestionIndex(currentQuestionIndex + 1);
-        } else {
-            setIsComplete(true);
-            generateCareerReport(updatedAnswers);
-            console.log("Basic Assessment Answers:", updatedAnswers);
-        }
+    setAnswers(updatedAnswers);
+    setCurrentQuestionIndex(newIndex);
+
+    localStorage.setItem("basicAssessmentProgress", JSON.stringify({
+        answers: updatedAnswers,
+        index: newIndex
+    }));
+
+    if (newIndex >= questions.length) {
+        setIsComplete(true);
+        generateCareerReport(updatedAnswers);
+        console.log("Basic Assessment Answers:", updatedAnswers);
     }
+}
 
     async function generateCareerReport(answers: string[]) {
         setLoading(true);
@@ -97,6 +117,18 @@ export function BasicAssessment(): React.JSX.Element {
                                 {option}
                             </button>
                         ))}
+                        <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "10px" }}>
+                            <button
+                                onClick={() => {
+                                    localStorage.removeItem("basicAssessmentProgress");
+                                    window.location.reload();
+                                }}
+                                className="cool-button"
+                            >
+                                Restart Assessment
+                            </button>
+                        </div>
+
                     </div>
                     <ProgressBar current={currentQuestionIndex} total={questions.length} />
                 </>
@@ -120,3 +152,4 @@ export function BasicAssessment(): React.JSX.Element {
         </div>
     );
 }
+
