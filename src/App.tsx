@@ -19,6 +19,9 @@ if (prevKey !== null) {
 function App() {
   const [key, setKey] = useState<string>(keyData);
   const location = useLocation();
+  
+  // Determine if we're on an assessment page
+  const isAssessmentPage = location.pathname.includes("assessment");
 
   async function handleSubmit() {
     localStorage.setItem(saveKeyData, JSON.stringify(key));
@@ -38,13 +41,13 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <header className={`App-header ${isAssessmentPage ? 'assessment-page' : ''}`}>
         <h1 className="fancy-title">Career-Helpi</h1>
         <div className="divider" />
 
         {/* Back/Home navigation when inside an assessment */}
-        {location.pathname.includes("assessment") && (
-          <div style={{ position: "absolute", top: "10px", right: "10px", display: "flex", gap: "10px" }}>
+        {isAssessmentPage && (
+          <div className="nav-buttons">
             <Link to="/">
               <button className="cool-button">Back to Home</button>
             </Link>
@@ -61,7 +64,19 @@ function App() {
           </div>
         )}
 
-        {!location.pathname.includes("assessment") && (
+        {location.pathname === "/basic-assessment" && (
+          <div className="assessment-title">
+            <h2>Basic Career Assessment</h2>
+          </div>
+        )}
+
+        {location.pathname === "/detailed-assessment" && (
+          <div className="assessment-title">
+            <h2>Detailed Career Assessment</h2>
+          </div>
+        )}
+
+        {!isAssessmentPage && (
           <>
             <div className="homepage-summary">
               <p>
