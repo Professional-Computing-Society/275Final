@@ -15,12 +15,12 @@
   .question {
     background: rgba(255, 255, 255, 0.05);
     color: white;
-    padding: 20px;
+    padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 600px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     text-align: center;
   }
   
