@@ -107,51 +107,53 @@ export function BasicAssessment(): React.JSX.Element {
             {!isComplete ? (
                 <>
                     <div className="question-container">
-                        <h2>{questions[currentQuestionIndex].body}</h2>
-                        {questions[currentQuestionIndex].options.map((option, index) => (
-                            <button
-                                key={index}
-                                onClick={() => submitQuestion(option)}
-                                className="option-button"
-                            >
-                                {option}
-                            </button>
-                        ))}
-            <div style={{ display: "flex", justifyContent: "center", gap: "20px", marginTop: "20px" }}>
+    <h2>{questions[currentQuestionIndex].body}</h2>
+    <div className="options">
+        {questions[currentQuestionIndex].options.map((option, index) => (
             <button
-                onClick={() => {
+                key={index}
+                onClick={() => submitQuestion(option)}
+                className="option-button"
+            >
+                {option}
+            </button>
+        ))}
+    </div>
+
+    <div style={{ display: "flex", justifyContent: "center", gap: "20px", marginTop: "20px" }}>
+        <button
+            onClick={() => {
                 if (currentQuestionIndex > 0) {
                     setCurrentQuestionIndex(currentQuestionIndex - 1);
                 }
-                }}
-                className="cool-button"
-            >
-                ←
-            </button>
+            }}
+            className="cool-button"
+        >
+            ←
+        </button>
 
-            <button
-                onClick={() => {
+        <button
+            onClick={() => {
                 localStorage.removeItem("basicAssessmentProgress");
                 window.location.reload();
-                }}
-                className="cool-button"
-            >
-                Reset
-            </button>
+            }}
+            className="cool-button"
+        >
+            Reset
+        </button>
 
-            <button
-                onClick={() => {
+        <button
+            onClick={() => {
                 if (currentQuestionIndex < questions.length - 1) {
                     setCurrentQuestionIndex(currentQuestionIndex + 1);
                 }
-                }}
-                className="cool-button"
-            >
-                →
-            </button>
-            </div>
-
-                    </div>
+            }}
+            className="cool-button"
+        >
+            →
+        </button>
+    </div>
+</div>
                     <ProgressBar current={currentQuestionIndex} total={questions.length} />
                 </>
             ) : (
