@@ -166,9 +166,22 @@ export function DetailedAssessment(): React.JSX.Element {
         <div className="result-box">
             <h3>You're all done!</h3>
             {loading ? (
-                <p>Generating your detailed career assessment...</p>
+    <p>Generating your career insight...</p>
             ) : error ? (
-                <p style={{ color: 'red' }}>Error: {error}</p>
+                <>
+                    <p style={{ color: 'red' }}>Error: {error}</p>
+                    <div style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}>
+                        <button
+                            onClick={() => {
+                                localStorage.removeItem("basicAssessmentProgress"); // or detailedAssessmentProgress
+                                window.location.reload();
+                            }}
+                            className="cool-button"
+                        >
+                            Restart Assessment
+                        </button>
+                    </div>
+                </>
             ) : (
                 <>
                     <p>Here's your personalized detailed career assessment:</p>
