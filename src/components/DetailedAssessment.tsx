@@ -137,7 +137,8 @@ export function DetailedAssessment(): React.JSX.Element {
         <button
             onClick={() => {
             localStorage.removeItem("detailedAssessmentProgress");
-            window.location.reload();
+            setCurrentQuestionIndex(0);
+            setAnswers([]);
             }}
             className="cool-button"
         >
