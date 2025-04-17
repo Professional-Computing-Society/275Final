@@ -117,17 +117,39 @@ export function BasicAssessment(): React.JSX.Element {
                                 {option}
                             </button>
                         ))}
-                        <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "10px" }}>
-                            <button
-                                onClick={() => {
-                                    localStorage.removeItem("basicAssessmentProgress");
-                                    window.location.reload();
-                                }}
-                                className="cool-button"
-                            >
-                                Restart Assessment
-                            </button>
-                        </div>
+            <div style={{ display: "flex", justifyContent: "center", gap: "20px", marginTop: "20px" }}>
+            <button
+                onClick={() => {
+                if (currentQuestionIndex > 0) {
+                    setCurrentQuestionIndex(currentQuestionIndex - 1);
+                }
+                }}
+                className="cool-button"
+            >
+                ←
+            </button>
+
+            <button
+                onClick={() => {
+                localStorage.removeItem("basicAssessmentProgress");
+                window.location.reload();
+                }}
+                className="cool-button"
+            >
+                Reset
+            </button>
+
+            <button
+                onClick={() => {
+                if (currentQuestionIndex < questions.length - 1) {
+                    setCurrentQuestionIndex(currentQuestionIndex + 1);
+                }
+                }}
+                className="cool-button"
+            >
+                →
+            </button>
+            </div>
 
                     </div>
                     <ProgressBar current={currentQuestionIndex} total={questions.length} />
@@ -145,7 +167,7 @@ export function BasicAssessment(): React.JSX.Element {
                     <div className="chatgpt-response">
                         <ReactMarkdown>{gptResponse || ""}</ReactMarkdown>
                     </div>
-                    <div style={{ marginTop: "20px" }}>
+                    <div style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}>
                         <button
                             onClick={() => {
                                 localStorage.removeItem("basicAssessmentProgress");
