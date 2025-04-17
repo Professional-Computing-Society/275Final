@@ -174,7 +174,7 @@ export function DetailedAssessment(): React.JSX.Element {
                     <div className="chatgpt-response">
                         <ReactMarkdown>{gptResponse || ""}</ReactMarkdown>
                     </div>
-                    <div style={{ marginTop: "20px" }}>
+                    <div style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}>
                         <button
                             onClick={() => {
                                 localStorage.removeItem("detailedAssessmentProgress");
