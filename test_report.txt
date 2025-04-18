@@ -60,8 +60,8 @@ All files                |       0 |        0 |       0 |       0 |
   index.tsx              |       0 |      100 |     100 |       0 | 8-22              
   reportWebVitals.ts     |       0 |        0 |       0 |       0 | 3-10              
  src/components          |       0 |        0 |       0 |       0 |                   
-  BasicAssessment.tsx    |       0 |        0 |       0 |       0 | 8-190             
-  DetailedAssessment.tsx |       0 |        0 |       0 |       0 | 9-195             
+  BasicAssessment.tsx    |       0 |        0 |       0 |       0 | 8-156             
+  DetailedAssessment.tsx |       0 |        0 |       0 |       0 | 9-159             
   ProgressBar.tsx        |       0 |      100 |       0 |       0 | 9-11              
  src/interfaces          |       0 |        0 |       0 |       0 |                   
   question.ts            |       0 |        0 |       0 |       0 |                   
@@ -69,5 +69,5 @@ All files                |       0 |        0 |       0 |       0 |
 Test Suites: 1 failed, 1 total
 Tests:       0 total
 Snapshots:   0 total
-Time:        2.897 s
+Time:        2.82 s
 Ran all test suites.
