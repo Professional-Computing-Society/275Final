@@ -60,11 +60,9 @@ export function BasicAssessment(): React.JSX.Element {
         const saved = localStorage.getItem("basicAssessmentProgress");
         if (saved) {
             const { answers, index } = JSON.parse(saved);
-            setAnswers(answers);
-            setCurrentQuestionIndex(index);
-            if (index >= questions.length) {
-                setIsComplete(true);
-                generateCareerReport(answers);
+            if(index < questions.length){
+                setAnswers(answers);
+                setCurrentQuestionIndex(index);
             }
         }
     }, []);
@@ -100,6 +98,15 @@ export function BasicAssessment(): React.JSX.Element {
         } finally {
             setLoading(false);
         }
+    }
+
+    function restartAssessment() {
+        localStorage.removeItem("basicAssessmentProgress");
+        setAnswers([]);
+        setCurrentQuestionIndex(0);
+        setIsComplete(false);
+        setGptResponse(null);
+        setError(null);
     }
     
     return (
@@ -167,10 +174,7 @@ export function BasicAssessment(): React.JSX.Element {
                     <p style={{ color: 'red' }}>Error: {error}</p>
                     <div style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}>
                         <button
-                            onClick={() => {
-                                localStorage.removeItem("basicAssessmentProgress"); // or detailedAssessmentProgress
-                                window.location.reload();
-                            }}
+                            onClick={restartAssessment}
                             className="cool-button"
                         >
                             Restart Assessment
@@ -185,10 +189,7 @@ export function BasicAssessment(): React.JSX.Element {
                     </div>
                     <div style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}>
                         <button
-                            onClick={() => {
-                                localStorage.removeItem("basicAssessmentProgress");
-                                window.location.reload();
-                            }}
+                            onClick={restartAssessment}
                             className="cool-button"
                         >
                             Restart Assessment
