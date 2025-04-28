@@ -3,6 +3,7 @@ import { ProgressBar } from "./ProgressBar";
 import "./BasicAssessment.css";
 import { chat } from "../chat";
 import ReactMarkdown from "react-markdown";
+import { jsPDF } from "jspdf";
 
 const questions = [
   {
@@ -55,6 +56,7 @@ export function BasicAssessment(): React.JSX.Element {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showWarning, setShowWarning] = useState(false);
+  const [pdfFile, setPdfFile] = useState<Blob | null>(null);
 
   useEffect(() => {
     const saved = localStorage.getItem("basicAssessmentProgress");
@@ -109,7 +111,38 @@ export function BasicAssessment(): React.JSX.Element {
 
     try {
       const response = await chat(answers);
+      const finalResponse = response || "Sorry, something went wrong.";
       setGptResponse(response || "Sorry, something went wrong.");
+
+      const doc = new jsPDF();
+
+      doc.setFontSize(22);
+      doc.setTextColor(46, 125, 50); // Green color
+      doc.text("You're all done!", 105, 20, { align: "center" });
+
+      doc.setFontSize(16);
+      doc.setTextColor(0, 0, 0); // Black
+      doc.text("Here's your personalized career insight:", 105, 30, { align: "center" });
+
+      doc.setFillColor(240, 248, 240); // light greenish
+      doc.roundedRect(10, 40, 190, 230, 5, 5, 'F');
+
+      doc.setFontSize(12);
+      doc.setTextColor(0, 0, 0);
+      const textLines = doc.splitTextToSize(finalResponse, 180);
+      doc.text(textLines, 15, 50);
+
+      const pdfBlob = doc.output("blob");
+      setPdfFile(pdfBlob);  
+
+
+
+      // const splitText = doc.splitTextToSize(finalResponse, 180); // Auto-wrap lines at ~180 width
+      // doc.text(splitText, 10, 10);
+
+      // const pdfBlob = doc.output("blob");
+      // setPdfFile(pdfBlob); // Save PDF blob to state
+
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -205,6 +238,23 @@ export function BasicAssessment(): React.JSX.Element {
               <div className="chatgpt-response">
                 <ReactMarkdown>{gptResponse || ""}</ReactMarkdown>
               </div>
+              {pdfFile && (
+                <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+                  <button
+                    className="cool-button"
+                    onClick={() => {
+                      const url = URL.createObjectURL(pdfFile);
+                      const a = document.createElement("a");
+                      a.href = url;
+                      a.download = "BasicAssessmentReport.pdf";
+                      a.click();
+                      URL.revokeObjectURL(url);
+                    }}
+                  >
+                    Download Career Report as PDF
+                  </button>
+                </div>
+              )}
               <div style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}>
                 <button onClick={restartAssessment} className="cool-button">
                   Restart Assessment
