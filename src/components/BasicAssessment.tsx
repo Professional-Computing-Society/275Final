@@ -153,16 +153,16 @@ export function BasicAssessment(): React.JSX.Element {
     // If we have a job image, add it to the PDF
     if (jobImage) {
       try {
-        doc.addImage(jobImage, 'JPEG', 65, 40, 80, 80);
+        doc.addImage(jobImage, 'JPEG', 75, 40, 60, 60);
         
         // Add report content below the image
         doc.setFillColor(240, 248, 240); // light greenish
-        doc.roundedRect(10, 130, 190, 150, 5, 5, 'F');
+        doc.roundedRect(10, 110, 190, 170, 5, 5, 'F');
 
         doc.setFontSize(12);
         doc.setTextColor(0, 0, 0);
         const textLines = doc.splitTextToSize(finalResponse, 180);
-        doc.text(textLines, 15, 140);
+        doc.text(textLines, 15, 120);
       } catch (err) {
         console.error("Error adding image to PDF:", err);
         
@@ -279,7 +279,7 @@ export function BasicAssessment(): React.JSX.Element {
               <p>Here's your personalized career insight:</p>
               {imageLoading && <p>Generating job image...</p>}
               {jobImage && (
-                <div style={{ maxWidth: "400px", margin: "0 auto", marginBottom: "20px" }}>
+                <div style={{ maxWidth: "300px", margin: "0 auto", marginBottom: "20px" }}>
                   <img src={jobImage} alt="Job visualization" style={{ width: "100%", borderRadius: "8px" }} />
                 </div>
               )}

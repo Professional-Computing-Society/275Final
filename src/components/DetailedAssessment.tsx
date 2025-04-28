@@ -150,13 +150,13 @@ export function DetailedAssessment(): React.JSX.Element {
     // If we have a job image, add it to the PDF
     if (jobImage) {
       try {
-        doc.addImage(jobImage, 'JPEG', 65, 40, 80, 80);
+        doc.addImage(jobImage, 'JPEG', 75, 40, 60, 60);
         
         // Add report content below the image
         doc.setFontSize(12);
         doc.setTextColor(0, 0, 0);
         const textLines = doc.splitTextToSize(responseText, 180);
-        doc.text(textLines, 15, 130);
+        doc.text(textLines, 15, 110);
       } catch (err) {
         console.error("Error adding image to PDF:", err);
         
@@ -267,7 +267,7 @@ export function DetailedAssessment(): React.JSX.Element {
               <p>Here's your personalized detailed career assessment:</p>
               {imageLoading && <p>Generating job image...</p>}
               {jobImage && (
-                <div style={{ maxWidth: "400px", margin: "0 auto", marginBottom: "20px" }}>
+                <div style={{ maxWidth: "300px", margin: "0 auto", marginBottom: "20px" }}>
                   <img src={jobImage} alt="Job visualization" style={{ width: "100%", borderRadius: "8px" }} />
                 </div>
               )}
