@@ -12,20 +12,20 @@ const questions = [
     options: ["Build things", "Help people", "Be creative", "Figure things out"]
   },
   {
-    body: "What do you enjoy more?",
-    options: ["Working with others", "Working alone", "Doing hands-on work", "Thinking and planning"]
+    body: "Which working style resonates most with you?",
+    options: ["Collaborating with a team toward a shared goal", "Independently pursuing your vision", "Engaging in hands-on, practical tasks", "Strategically planning and analyzing before acting"]
   },
   {
-    body: "What are you good at?",
-    options: ["Fixing things", "Talking to people", "Drawing or making art", "Solving puzzles"]
+    body: "Which skill comes most naturally to you?",
+    options: ["Repairing or improving the physical world", "Building relationships through conversation", "Innovating through art, design, or storytelling", "Solving logical or analytical challenges"]
   },
   {
-    body: "How do you learn best?",
-    options: ["By doing", "By watching", "By reading", "By listening"]
+    body: "How do you pick up new skills fastest?",
+    options: ["Jump in and get hands-on", "Watch someone else first", "Read up and research", "Listen and soak it in"]
   },
   {
-    body: "What makes you excited?",
-    options: ["Trying new things", "Helping someone", "Finishing a project", "Learning something cool"]
+    body: "What type of project most excites you?",
+    options: ["Collaborations with a group", "Independent challenges", "Inventive, open-ended creative endeavors", "Rigorous problem-solving tasks that test your intellect"]
   },
   {
     body: "What kind of projects excite you the most?",
@@ -36,8 +36,8 @@ const questions = [
     options: ["Learn and try again", "Ask for help", "Look for creative alternatives", "Pause and reflect before continuing"]
   },
   {
-    body: "What kind of challenges do you enjoy?",
-    options: ["Hands-on tasks", "Helping others solve issues", "Coming up with ideas", "Solving tricky problems"]
+    body: "What kinds of challenges do you find most rewarding?",
+    options: ["Hands-on construction or repair work", "Facilitating solutions for interpersonal issues", "Generating fresh, original concepts", "Unraveling complex puzzles and problems"]
   },
   {
     body: "Where do you feel most productive?",
@@ -48,6 +48,7 @@ const questions = [
     options: ["Screwdriver", "Whiteboard marker", "Paintbrush", "Calculator"]
   }
 ];
+
 
 export function BasicAssessment(): React.JSX.Element {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
