@@ -3,6 +3,7 @@ import { ProgressBar } from "./ProgressBar";
 import "./BasicAssessment.css";
 import { chat, generateJobImage, extractJobTitle } from "../chat";
 import ReactMarkdown from "react-markdown";
+import { BounceLoader } from "react-spinners";
 import { jsPDF } from "jspdf";
 
 const questions = [
@@ -54,6 +55,7 @@ export function BasicAssessment(): React.JSX.Element {
   const [isComplete, setIsComplete] = useState(false);
   const [gptResponse, setGptResponse] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState<string>("Generating your career insight...");
   const [error, setError] = useState<string | null>(null);
   const [showWarning, setShowWarning] = useState(false);
   const [pdfFile, setPdfFile] = useState<Blob | null>(null);
@@ -110,7 +112,19 @@ export function BasicAssessment(): React.JSX.Element {
   async function generateCareerReport(answers: string[]) {
     setLoading(true);
     setError(null);
+    
+    const messages = [
+      "Analyzing your answers...",
+      "Matching your skills to career paths...",
+      "Finalizing your personalized report..."
+    ];
+    let messageIndex = 0;
 
+    const interval = setInterval(() => {
+      setLoadingMessage(messages[messageIndex]);
+      messageIndex = (messageIndex + 1) % messages.length;
+    }, 2000);
+  
     try {
       const response = await chat(answers);
       const finalResponse = response || "Sorry, something went wrong.";
@@ -135,6 +149,7 @@ export function BasicAssessment(): React.JSX.Element {
     } catch (err: any) {
       setError(err.message);
     } finally {
+      clearInterval(interval);
       setLoading(false);
     }
   }
@@ -264,7 +279,10 @@ export function BasicAssessment(): React.JSX.Element {
         <div className="result-box">
           <h3>You're all done!</h3>
           {loading ? (
-            <p>Generating your career insight...</p>
+            <div className="loading-container">
+              <BounceLoader color="#4CAF50" size={70} />
+              <p className="loading-message">{loadingMessage}</p>
+              </div>
           ) : error ? (
             <>
               <p style={{ color: "red" }}>Error: {error}</p>

@@ -75,6 +75,23 @@
     to { opacity: 1; transform: translateY(0); }
   }  
 
+
+
+.loading-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding: 20px;
+}
+
+.loading-message {
+    font-size: 1.2rem;
+    color: #333;
+    margin-top: 10px;
+}
+
 /* Completion message styling */
 .result-box {
     border: 2px solid #28a745;
