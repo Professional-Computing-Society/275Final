@@ -37,9 +37,9 @@ FAIL src/App.test.tsx
       4 | import { chat, generateJobImage, extractJobTitle } from "../chat";
     > 5 | import ReactMarkdown from "react-markdown";
         | ^
-      6 | import { jsPDF } from "jspdf";
-      7 |
-      8 | const questions = [
+      6 | import { BounceLoader } from "react-spinners";
+      7 | import { jsPDF } from "jspdf";
+      8 |
 
       at Runtime.createScriptFromCode (node_modules/jest-runtime/build/index.js:1728:14)
       at Object.<anonymous> (src/components/DetailedAssessment.tsx:5:1)
@@ -60,8 +60,8 @@ All files                |       0 |        0 |       0 |       0 |
   index.tsx              |       0 |      100 |     100 |       0 | 8-22              
   reportWebVitals.ts     |       0 |        0 |       0 |       0 | 3-10              
  src/components          |       0 |        0 |       0 |       0 |                   
-  BasicAssessment.tsx    |       0 |        0 |       0 |       0 | 8-299             
-  DetailedAssessment.tsx |       0 |        0 |       0 |       0 | 8-287             
+  BasicAssessment.tsx    |       0 |        0 |       0 |       0 | 9-317             
+  DetailedAssessment.tsx |       0 |        0 |       0 |       0 | 9-305             
   ProgressBar.tsx        |       0 |      100 |       0 |       0 | 9-11              
  src/interfaces          |       0 |        0 |       0 |       0 |                   
   question.ts            |       0 |        0 |       0 |       0 |                   
@@ -69,5 +69,5 @@ All files                |       0 |        0 |       0 |       0 |
 Test Suites: 1 failed, 1 total
 Tests:       0 total
 Snapshots:   0 total
-Time:        3.129 s
+Time:        3.209 s
 Ran all test suites.
