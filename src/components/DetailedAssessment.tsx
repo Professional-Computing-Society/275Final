@@ -188,7 +188,6 @@ export function DetailedAssessment(): React.JSX.Element {
       const response = await chat(answers, "detailed");
       setGptResponse(response || "Sorry, something went wrong.");
       
-      // Extract the first job title and generate an image
       if (response) {
         const jobTitle = extractJobTitle(response, "detailed");
         if (jobTitle) {
@@ -215,40 +214,47 @@ export function DetailedAssessment(): React.JSX.Element {
     const doc = new jsPDF();
     
     doc.setFontSize(22);
-    doc.setTextColor(46, 125, 50); // Green color
+    doc.setTextColor(46, 125, 50);
     doc.text("Detailed Career Assessment", 105, 20, { align: "center" });
     
     doc.setFontSize(16);
-    doc.setTextColor(0, 0, 0); // Black
-    doc.text("Your personalized career insight:", 105, 30, { align: "center" });
+    doc.setTextColor(0, 0, 0);
+    doc.text("Here's your personalized career insight:", 105, 30, { align: "center" });
     
-    // If we have a job image, add it to the PDF
+    const cleanedText = responseText.replace(/\*\*(.*?)\*\*/g, '$1');
+    const lines = cleanedText.split("\n");
+    const yStart = jobImage ? 120 : 50;
+  
     if (jobImage) {
       try {
         doc.addImage(jobImage, 'JPEG', 75, 40, 60, 60);
-        
-        // Add report content below the image
-        doc.setFontSize(12);
-        doc.setTextColor(0, 0, 0);
-        const textLines = doc.splitTextToSize(responseText, 180);
-        doc.text(textLines, 15, 110);
-      } catch (err) {
-        console.error("Error adding image to PDF:", err);
-        
-        // If image fails, just add the text content
-        doc.setFontSize(12);
-        doc.setTextColor(0, 0, 0);
-        const textLines = doc.splitTextToSize(responseText, 180);
-        doc.text(textLines, 15, 40);
+        doc.setFillColor(240, 248, 240);
+        doc.roundedRect(10, 110, 190, 170, 5, 5, 'F');
+      } catch {
+        doc.setFillColor(240, 248, 240);
+        doc.roundedRect(10, 40, 190, 230, 5, 5, 'F');
       }
     } else {
-      // No image, just add the text content
-      doc.setFontSize(12);
-      doc.setTextColor(0, 0, 0);
-      const textLines = doc.splitTextToSize(responseText, 180);
-      doc.text(textLines, 15, 40);
+      doc.setFillColor(240, 248, 240);
+      doc.roundedRect(10, 40, 190, 230, 5, 5, 'F');
     }
     
+    doc.setFontSize(12);
+    doc.setTextColor(0, 0, 0);
+  
+    let y = yStart;
+    lines.forEach((line: string) => {
+      let formattedLine = line.trimStart();
+  
+      if (formattedLine.startsWith("* ")) {
+        formattedLine = "• " + formattedLine.slice(2);
+      }
+  
+      const wrapped = doc.splitTextToSize(formattedLine, 180);
+      doc.text(wrapped, 15, y);
+      y += wrapped.length * 7;
+    });
+
     const pdfBlob = doc.output("blob");
     setPdfFile(pdfBlob);
   }

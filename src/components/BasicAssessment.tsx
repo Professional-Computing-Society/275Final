@@ -78,7 +78,6 @@ export function BasicAssessment(): React.JSX.Element {
     const updatedAnswers = [...answers];
 
     if (updatedAnswers[currentQuestionIndex] === option) {
-      // Toggle off selection
       updatedAnswers[currentQuestionIndex] = "";
     } else {
       updatedAnswers[currentQuestionIndex] = option;
@@ -131,7 +130,6 @@ export function BasicAssessment(): React.JSX.Element {
       const finalResponse = response || "Sorry, something went wrong.";
       setGptResponse(response || "Sorry, something went wrong.");
 
-      // Extract the first job title and generate an image
       if (response) {
         const jobTitle = extractJobTitle(response);
         if (jobTitle) {
@@ -160,7 +158,7 @@ export function BasicAssessment(): React.JSX.Element {
   
     doc.setFontSize(22);
     doc.setTextColor(46, 125, 50);
-    doc.text("You're all done!", 105, 20, { align: "center" });
+    doc.text("Basic Career Assessment", 105, 20, { align: "center" });
   
     doc.setFontSize(16);
     doc.setTextColor(0, 0, 0);
