@@ -16,6 +16,22 @@
     from { opacity: 0; transform: translateY(-5px); }
     to { opacity: 1; transform: translateY(0); }
   }  
+
+
+.loading-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding: 20px;
+}
+
+.loading-message {
+    font-size: 1.2rem;
+    color: #333;
+    margin-top: 10px;
+}
   
   .question {
     background: rgba(255, 255, 255, 0.05);

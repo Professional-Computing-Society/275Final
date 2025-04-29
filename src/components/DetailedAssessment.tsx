@@ -3,6 +3,7 @@ import { ProgressBar } from "./ProgressBar";
 import "./DetailedAssessment.css";
 import { chat } from "../chat";
 import ReactMarkdown from "react-markdown";
+import { BounceLoader } from "react-spinners";
 
 const questions = [
   {
@@ -203,7 +204,7 @@ export function DetailedAssessment(): React.JSX.Element {
           <h3>You're all done!</h3>
           {loading ? (
             <div className="loading-container">
-              <div className="spinner"></div>
+              <BounceLoader color="#4CAF50" size={70} />
             <p className="loading-message">{loadingMessage}</p>
           </div>
           ) : error ? (
