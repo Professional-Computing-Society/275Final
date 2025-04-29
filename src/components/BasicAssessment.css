@@ -75,6 +75,39 @@
     to { opacity: 1; transform: translateY(0); }
   }  
 
+  /* Loading message styling */
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #09f;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+  
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+.loading-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding: 20px;
+}
+
+.loading-message {
+    font-size: 1.2rem;
+    color: #333;
+    margin-top: 10px;
+}
+
 /* Completion message styling */
 .result-box {
     border: 2px solid #28a745;
