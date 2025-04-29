@@ -8,44 +8,104 @@ import { jsPDF } from "jspdf";
 
 const questions = [
   {
-    body: "What type of work environment do you thrive in?",
-    options: ["Fast-paced and dynamic", "Structured and predictable", "Creative and flexible", "Independent and autonomous", "Collaborative and team-focused"]
+    body: "What type of work environment allows you to perform at your best?",
+    options: [
+      "Fast-paced and constantly evolving",
+      "Structured, stable, and well-organized",
+      "Creative, open-ended, and flexible",
+      "Independent, self-driven, and autonomous",
+      "Collaborative, team-oriented, and socially engaging"
+    ]
   },
   {
-    body: "Which of these tasks appeals to you most?",
-    options: ["Solving complex technical problems", "Leading and managing projects", "Designing and creating visuals", "Helping and counseling people", "Analyzing data and patterns"]
+    body: "Which of these tasks do you find most appealing?",
+    options: [
+      "Tackling complex technical challenges",
+      "Leading teams and orchestrating projects",
+      "Designing and crafting compelling visuals",
+      "Supporting and counseling individuals",
+      "Uncovering patterns through data analysis"
+    ]
   },
   {
-    body: "What motivates you in your work?",
-    options: ["Innovation and progress", "Making a difference in people's lives", "Recognition and achievement", "Mastering skills and knowledge", "Financial success and stability"]
+    body: "What is your primary source of motivation in your work?",
+    options: [
+      "Driving innovation and advancement",
+      "Positively impacting people's lives",
+      "Earning recognition for achievements",
+      "Mastering new skills and deepening expertise",
+      "Achieving financial security and career stability"
+    ]
   },
   {
-    body: "How do you prefer to make decisions?",
-    options: ["With data and evidence", "Based on intuition", "By consulting with others", "After deep analysis", "Through hands-on experimentation"]
+    body: "How do you typically approach decision-making?",
+    options: [
+      "Ground decisions in data and empirical evidence",
+      "Trust intuition and instinct",
+      "Seek input and advice from others",
+      "Engage in deep analysis and careful reasoning",
+      "Experiment and adapt through hands-on experience"
+    ]
   },
   {
-    body: "Which activity would you choose for a free afternoon?",
-    options: ["Building something", "Volunteering", "Painting or designing", "Reading or researching", "Organizing a group event"]
+    body: "How would you most enjoy spending a free afternoon?",
+    options: [
+      "Constructing or building something tangible",
+      "Volunteering to help others",
+      "Creating art, designs, or visuals",
+      "Reading, researching, and expanding knowledge",
+      "Organizing a social or group event"
+    ]
   },
   {
-    body: "What role do you usually take in a team setting?",
-    options: ["Leader or organizer", "Idea generator", "Supporter or helper", "Researcher or analyst", "Hands-on contributor"]
+    body: "What role do you naturally take within a team setting?",
+    options: [
+      "Leader and strategic coordinator",
+      "Creative innovator and idea generator",
+      "Supportive facilitator and helper",
+      "Researcher and critical analyst",
+      "Hands-on implementer and problem-solver"
+    ]
   },
   {
-    body: "Which skill would you most like to develop further?",
-    options: ["Leadership", "Technical expertise", "Creative expression", "Empathy and communication", "Strategic thinking"]
+    body: "Which skill would you most like to strengthen or refine?",
+    options: [
+      "Leadership and management abilities",
+      "Technical proficiency and expertise",
+      "Creative expression and innovation",
+      "Empathy, communication, and interpersonal skills",
+      "Strategic thinking and long-term planning"
+    ]
   },
   {
-    body: "How do you approach unfamiliar tasks?",
-    options: ["Jump in and experiment", "Ask for guidance", "Research thoroughly", "Try to connect it to something I know", "Break it into smaller parts"]
+    body: "When encountering an unfamiliar task, how do you respond?",
+    options: [
+      "Dive in and learn through trial and error",
+      "Seek advice and mentorship",
+      "Research extensively before acting",
+      "Draw connections to existing knowledge",
+      "Deconstruct the task into manageable steps"
+    ]
   },
   {
-    body: "What kind of work gives you the most energy?",
-    options: ["Creative brainstorming", "Helping others improve", "Building or fixing something", "Analyzing complex data", "Organizing and managing"]
+    body: "What type of work leaves you feeling most energized?",
+    options: [
+      "Collaborative creative brainstorming",
+      "Coaching and empowering others",
+      "Building, fixing, or crafting solutions",
+      "Analyzing complex data or systems",
+      "Planning, organizing, and executing initiatives"
+    ]
   },
   {
-    body: "When starting a new project, whats your first instinct?",
-    options: ["Visualize the result", "Make a checklist", "Ask who Im working with", "Explore what's possible", "Define the problem"]
+    body: "When beginning a new project, what is your natural instinct?",
+    options: [
+      "Envision the final outcome vividly",
+      "Draft a detailed checklist or plan",
+      "Identify collaborators and team dynamics",
+      "Explore possibilities and experiment freely",
+      "Define the core problem or challenge to address"
+    ]
   }
 ];
 
