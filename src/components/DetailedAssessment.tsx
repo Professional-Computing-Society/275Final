@@ -53,6 +53,7 @@ export function DetailedAssessment(): React.JSX.Element {
   const [isComplete, setIsComplete] = useState(false);
   const [gptResponse, setGptResponse] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState<string>("Generating your career insight...");
   const [error, setError] = useState<string | null>(null);
   const [showWarning, setShowWarning] = useState(false);
 
@@ -106,12 +107,25 @@ export function DetailedAssessment(): React.JSX.Element {
     setLoading(true);
     setError(null);
 
+    const messages = [
+      "Analyzing your answers...",
+      "Matching your skills to career paths...",
+      "Finalizing your personalized report..."
+    ];
+    let messageIndex = 0;
+
+    const interval = setInterval(() => {
+      setLoadingMessage(messages[messageIndex]);
+      messageIndex = (messageIndex + 1) % messages.length;
+    }, 2000);
+
     try {
       const response = await chat(answers, "detailed");
       setGptResponse(response || "Sorry, something went wrong.");
     } catch (err: any) {
       setError(err.message);
     } finally {
+      clearInterval(interval);
       setLoading(false);
     }
   }
@@ -188,7 +202,10 @@ export function DetailedAssessment(): React.JSX.Element {
         <div className="result-box">
           <h3>You're all done!</h3>
           {loading ? (
-            <p>Generating your career insight...</p>
+            <div className="loading-container">
+              <div className="spinner"></div>
+            <p className="loading-message">{loadingMessage}</p>
+          </div>
           ) : error ? (
             <>
               <p style={{ color: "red" }}>Error: {error}</p>
