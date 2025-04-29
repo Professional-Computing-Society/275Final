@@ -53,6 +53,7 @@ export function BasicAssessment(): React.JSX.Element {
   const [isComplete, setIsComplete] = useState(false);
   const [gptResponse, setGptResponse] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState<string>("Generating your career insight...");
   const [error, setError] = useState<string | null>(null);
   const [showWarning, setShowWarning] = useState(false);
 
@@ -106,13 +107,26 @@ export function BasicAssessment(): React.JSX.Element {
   async function generateCareerReport(answers: string[]) {
     setLoading(true);
     setError(null);
+    
+    const messages = [
+      "Analyzing your answers...",
+      "Matching your skills to career paths...",
+      "Finalizing your personalized report..."
+    ];
+    let messageIndex = 0;
 
+    const interval = setInterval(() => {
+      setLoadingMessage(messages[messageIndex]);
+      messageIndex = (messageIndex + 1) % messages.length;
+    }, 2000);
+  
     try {
       const response = await chat(answers);
       setGptResponse(response || "Sorry, something went wrong.");
     } catch (err: any) {
       setError(err.message);
     } finally {
+      clearInterval(interval);
       setLoading(false);
     }
   }
