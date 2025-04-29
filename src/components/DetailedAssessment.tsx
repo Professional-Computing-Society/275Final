@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { ProgressBar } from "./ProgressBar";
 import "./DetailedAssessment.css";
-import { chat } from "../chat";
+import { chat, generateJobImage, extractJobTitle } from "../chat";
 import ReactMarkdown from "react-markdown";
 import { BounceLoader } from "react-spinners";
+import { jsPDF } from "jspdf";
 
 const questions = [
   {
@@ -57,6 +58,9 @@ export function DetailedAssessment(): React.JSX.Element {
   const [loadingMessage, setLoadingMessage] = useState<string>("Generating your career insight...");
   const [error, setError] = useState<string | null>(null);
   const [showWarning, setShowWarning] = useState(false);
+  const [pdfFile, setPdfFile] = useState<Blob | null>(null);
+  const [jobImage, setJobImage] = useState<string | null>(null);
+  const [imageLoading, setImageLoading] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem("detailedAssessmentProgress");
@@ -123,12 +127,70 @@ export function DetailedAssessment(): React.JSX.Element {
     try {
       const response = await chat(answers, "detailed");
       setGptResponse(response || "Sorry, something went wrong.");
+      
+      // Extract the first job title and generate an image
+      if (response) {
+        const jobTitle = extractJobTitle(response, "detailed");
+        if (jobTitle) {
+          console.log("Job title extracted:", jobTitle);
+          setImageLoading(true);
+          const imageUrl = await generateJobImage(jobTitle);
+          if (imageUrl) {
+            setJobImage(imageUrl);
+          }
+          setImageLoading(false);
+        }
+      }
+      
+      generatePDF(response || "");
     } catch (err: any) {
       setError(err.message);
     } finally {
       clearInterval(interval);
       setLoading(false);
     }
+  }
+
+  function generatePDF(responseText: string) {
+    const doc = new jsPDF();
+    
+    doc.setFontSize(22);
+    doc.setTextColor(46, 125, 50); // Green color
+    doc.text("Detailed Career Assessment", 105, 20, { align: "center" });
+    
+    doc.setFontSize(16);
+    doc.setTextColor(0, 0, 0); // Black
+    doc.text("Your personalized career insight:", 105, 30, { align: "center" });
+    
+    // If we have a job image, add it to the PDF
+    if (jobImage) {
+      try {
+        doc.addImage(jobImage, 'JPEG', 75, 40, 60, 60);
+        
+        // Add report content below the image
+        doc.setFontSize(12);
+        doc.setTextColor(0, 0, 0);
+        const textLines = doc.splitTextToSize(responseText, 180);
+        doc.text(textLines, 15, 110);
+      } catch (err) {
+        console.error("Error adding image to PDF:", err);
+        
+        // If image fails, just add the text content
+        doc.setFontSize(12);
+        doc.setTextColor(0, 0, 0);
+        const textLines = doc.splitTextToSize(responseText, 180);
+        doc.text(textLines, 15, 40);
+      }
+    } else {
+      // No image, just add the text content
+      doc.setFontSize(12);
+      doc.setTextColor(0, 0, 0);
+      const textLines = doc.splitTextToSize(responseText, 180);
+      doc.text(textLines, 15, 40);
+    }
+    
+    const pdfBlob = doc.output("blob");
+    setPdfFile(pdfBlob);
   }
 
   function restartAssessment() {
@@ -138,6 +200,8 @@ export function DetailedAssessment(): React.JSX.Element {
     setIsComplete(false);
     setGptResponse(null);
     setError(null);
+    setJobImage(null);
+    setPdfFile(null);
   }
 
   return (
@@ -219,9 +283,32 @@ export function DetailedAssessment(): React.JSX.Element {
           ) : (
             <>
               <p>Here's your personalized detailed career assessment:</p>
+              {imageLoading && <p>Generating job image...</p>}
+              {jobImage && (
+                <div style={{ maxWidth: "300px", margin: "0 auto", marginBottom: "20px" }}>
+                  <img src={jobImage} alt="Job visualization" style={{ width: "100%", borderRadius: "8px" }} />
+                </div>
+              )}
               <div className="chatgpt-response">
                 <ReactMarkdown>{gptResponse || ""}</ReactMarkdown>
               </div>
+              {pdfFile && (
+                <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+                  <button
+                    className="cool-button"
+                    onClick={() => {
+                      const url = URL.createObjectURL(pdfFile);
+                      const a = document.createElement("a");
+                      a.href = url;
+                      a.download = "DetailedCareerReport.pdf";
+                      a.click();
+                      URL.revokeObjectURL(url);
+                    }}
+                  >
+                    Download Career Report as PDF
+                  </button>
+                </div>
+              )}
               <div style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}>
                 <button onClick={restartAssessment} className="cool-button">
                   Restart Assessment
