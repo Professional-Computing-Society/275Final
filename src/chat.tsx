@@ -1,23 +1,8 @@
 import OpenAI from "openai";
 
 const LOCAL_STORAGE_KEY = "MYKEY";
-const MAX_RETRIES=3;
-const BACKOFF_BASE_MS=1000;
 
-function sleep(ms:number){
-  return new Promise(resolve=> setTimeout(resolve,ms));
-}
-
-function isTransientError(err:any):boolean{
-  const status = err?.status;
-  return(
-    status===429 ||
-    (status >=500 && status < 600) ||
-    !status
-  );
-}
-export async function chat(answers: string[], assessmentType: string = "basic"
-  ):Promise<string> {
+export async function chat(answers: string[], assessmentType: string = "basic") {
   const storedKey = localStorage.getItem(LOCAL_STORAGE_KEY);
   const apiKey = storedKey ? JSON.parse(storedKey) : null;
 
@@ -84,77 +69,83 @@ export async function chat(answers: string[], assessmentType: string = "basic"
 
       Based on these answers, what types of careers or work styles might this person enjoy? Keep your response short and focused on their key strengths, but be sure to include at least one specific job title recommendation.
     `;
-  for(let attempt=0; attempt<MAX_RETRIES; attempt++){
-    try {
-      const completion = await client.chat.completions.create({
-        model: "gpt-4o",
-        messages: [
-          {role: "system",content: systemPrompt},
-          {role: "user",content: userPrompt}
-        ],
-      });
-      return (
-        completion.choices[0]?.message?.content || 
-        "Sorry we could not generate a response please try again"
-      );
-    } catch (err: any) {
-    console.error(`Chat attempt ${attempt + 1} failed:`, err);
-      if (isTransientError(err) && attempt < MAX_RETRIES - 1) {
-        const delay = BACKOFF_BASE_MS * 2 ** attempt;
-        await sleep(delay);
-        continue;
-      }
-      return (
-        "We're experiencing technical difficulties generating your career insights right now. " +
-        "Please try again later."
-      );
+
+  try {
+    const completion = await client.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+        {
+          role: "system",
+          content: systemPrompt,
+        },
+        {
+          role: "user",
+          content: userPrompt,
+        }],
+    });
+
+    return completion.choices[0]?.message?.content;
+  } catch (err: any) {
+    if (err.status === 429) {
+      throw new Error("Rate limit exceeded or no quota remaining. Check your OpenAI usage dashboard.");
+    } else if (err.status === 401) {
+      throw new Error("Invalid API key. Please double-check your key.");
+    } else {
+      throw new Error(`OpenAI error: ${err.message}`);
     }
   }
-  return (
-    "We're experiencing technical difficulties generating your career insights right now. " +
-    "Please try again later."
-  );
 }
 
-export async function generateJobImage(jobTitle: string): Promise<string | null> {
+export async function generateJobImage(jobTitle: string) {
   const storedKey = localStorage.getItem(LOCAL_STORAGE_KEY);
   const apiKey = storedKey ? JSON.parse(storedKey) : null;
 
   if (!apiKey) {
-    console.error("OpenAI API key not found in localStorage.");
-    return null;
+    throw new Error("OpenAI API key not found in localStorage.");
   }
 
   const client = new OpenAI({ apiKey, dangerouslyAllowBrowser: true });
 
-  for(let attempt=0; attempt<MAX_RETRIES; attempt++){
-    try {
-      const response = await client.images.generate({
-        model: "dall-e-3",
-        prompt: `A professional looking image representing a person working as a ${jobTitle}. The image should be clean, professional, and suitable for a career report. Show the person engaged in typical activities for this profession in their workplace.`,
-        n: 1,
-        size: "1024x1024",
-      });
-      return response.data[0]?.url || null;
-    }catch(err:any){
-      console.error(`Image generation attempt ${attempt+1} failed`, err);
-      if(isTransientError(err) && attempt<MAX_RETRIES-1){
-        const delay = BACKOFF_BASE_MS * 2 ** attempt;
-        await sleep(delay);
-        continue;
-      }
-      return null;
+  try {
+    const response = await client.images.generate({
+      model: "dall-e-3",
+      prompt: `A professional looking image representing a person working as a ${jobTitle}. The image should be clean, professional, and suitable for a career report. Show the person engaged in typical activities for this profession in their workplace.`,
+      n: 1,
+      size: "1024x1024",
+    });
+
+    if (response.data[0]?.url) {
+      return response.data[0].url;
     }
+    return null;
+  } catch (error: any) {
+    console.error("Error generating image:", error);
+    return null;
   }
-  return null;
 }
 
 export function extractJobTitle(text: string, assessmentType: string = "basic"): string | null {
   // For detailed assessment, look for job titles section
   if (assessmentType === "detailed") {
-    const match = text.match(/(?:Job Titles:|## Job Titles\s*)(?:\r?\n)(?:\*|\d+\.)\s*([^\n\r]+)/i);
-    if (match) return match[1].trim();
+    const jobTitleMatch = text.match(/(?:Job Titles:|Career Suggestions:|Recommended Jobs:|## [^#\n]*Job[^#\n]*|### [^#\n]*Job[^#\n]*)[:\s]*(?:\n|\r\n)(?:\*|-|\d+\.)\s*([^\n\r*]+)/i);
+    
+    if (jobTitleMatch && jobTitleMatch[1]) {
+      return jobTitleMatch[1].trim();
+    }
   }
-  const match = text.match(/(?:career|job)[s]?(?: like| such as|:)\s*([^.,\n\r]+)/i);
-  return match ? match[1].trim() : null;
+  
+  // For basic assessment or fallback
+  const careerMatch = text.match(/(?:career|job|profession|occupation|role|position|path|field)[s]?(?:\s+like|\s+such as|\s+including|\s+in|\s+as a|:)\s+([^.,\n\r]+)/i);
+  
+  if (careerMatch && careerMatch[1]) {
+    // Get the first suggested career/job title
+    const careerSuggestion = careerMatch[1].trim()
+      .replace(/^(?:a|an|the)\s+/i, '') // Remove leading articles
+      .split(/\s+or\s+|\s+and\s+|,/)[0] // Take first item if multiple are listed
+      .trim();
+    
+    return careerSuggestion;
+  }
+  
+  return null;
 }
