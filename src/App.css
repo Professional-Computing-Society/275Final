@@ -144,6 +144,10 @@ h1 {
   align-items: center;
 }
 
+.assessment-button a {
+  text-decoration: none;;
+}
+
 
 .description-box {
   font-size: 0.95rem;
@@ -193,6 +197,10 @@ h1 {
   display: flex;
   gap: 15px;
   z-index: 100;
+}
+
+.nav-buttons a {
+  text-decoration: none;
 }
 
 .assessment-title {
