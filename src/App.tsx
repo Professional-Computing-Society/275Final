@@ -4,6 +4,7 @@ import { BasicAssessment } from './components/BasicAssessment';
 import { Route, Link, Routes, useLocation } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 import './App.css';
+import cloud from './cloud.png';
 
 // Chat GPT function
 
@@ -41,8 +42,28 @@ function App() {
 
   return (
     <div className="App">
+      <div className="cloud-container">
+      <img src={cloud} className="cloud cloud1" alt="cloud" />
+        <img src={cloud} className="cloud cloud2" alt="cloud" />
+        <img src={cloud} className="cloud cloud3" alt="cloud" />
+        <img src={cloud} className="cloud cloud7" alt="cloud" />
+        <img src={cloud} className="cloud cloud8" alt="cloud" />
+        <img src={cloud} className="cloud cloud9" alt="cloud" />
+        <img src={cloud} className="cloud cloud4 reverse" alt="cloud" />
+        <img src={cloud} className="cloud cloud5 reverse" alt="cloud" />
+        <img src={cloud} className="cloud cloud6 reverse" alt="cloud" />
+        <img src={cloud} className="cloud cloud10 reverse" alt="cloud" />
+        <img src={cloud} className="cloud cloud11 reverse" alt="cloud" />
+        <img src={cloud} className="cloud cloud12 reverse" alt="cloud" />
+        <img src={cloud} className="cloud cloud13 reverse" alt="cloud" />
+        <img src={cloud} className="cloud cloud14" alt="cloud" />
+        <img src={cloud} className="cloud cloud15 reverse" alt="cloud" />
+        <img src={cloud} className="cloud cloud16" alt="cloud" />
+        <img src={cloud} className="cloud cloud17 reverse" alt="cloud" />
+        <img src={cloud} className="cloud cloud18" alt="cloud" />
+      </div>
       <header className={`App-header ${isAssessmentPage ? 'assessment-page' : ''}`}>
-        <h1 className="fancy-title">Career-Helpi</h1>
+        <h1 className="fancy-title">Career Cloud</h1>
         <div className="divider" />
 
         {/* Back/Home navigation when inside an assessment */}
