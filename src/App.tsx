@@ -5,6 +5,8 @@ import { Route, Link, Routes, useLocation } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 import './App.css';
 import cloud from './cloud.png';
+// Import the logo directly instead of using a public path
+// import logo from './logo.svg'; 
 
 // Chat GPT function
 
@@ -42,6 +44,11 @@ function App() {
 
   return (
     <div className="App">
+      <div className="logo-container">
+        <Link to="/">
+          <img src={`${process.env.PUBLIC_URL}/career_cloud_logo.png`} alt="Career Cloud Logo" className="site-logo" />
+        </Link>
+      </div>
       <div className="cloud-container">
       <img src={cloud} className="cloud cloud1" alt="cloud" />
         <img src={cloud} className="cloud cloud2" alt="cloud" />
