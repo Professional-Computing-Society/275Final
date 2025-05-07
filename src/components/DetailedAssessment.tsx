@@ -212,15 +212,19 @@ export function DetailedAssessment(): React.JSX.Element {
 
   function generatePDF(responseText: string) {
     const doc = new jsPDF();
-    
+    const pageHeight = doc.internal.pageSize.height;
+    const lineHeight = 8;
+    const marginTop = 24;
+    const usableHeight = pageHeight - marginTop;
+  
     doc.setFontSize(22);
     doc.setTextColor(46, 125, 50);
     doc.text("Detailed Career Assessment", 105, 20, { align: "center" });
-    
+  
     doc.setFontSize(16);
     doc.setTextColor(0, 0, 0);
     doc.text("Here's your personalized career insight:", 105, 30, { align: "center" });
-    
+  
     const cleanedText = responseText.replace(/\*\*(.*?)\*\*/g, '$1');
     const lines = cleanedText.split("\n");
     const yStart = jobImage ? 120 : 50;
@@ -238,26 +242,47 @@ export function DetailedAssessment(): React.JSX.Element {
       doc.setFillColor(240, 248, 240);
       doc.roundedRect(10, 40, 190, 230, 5, 5, 'F');
     }
-    
+  
     doc.setFontSize(12);
     doc.setTextColor(0, 0, 0);
   
     let y = yStart;
+  
     lines.forEach((line: string) => {
       let formattedLine = line.trimStart();
   
       if (formattedLine.startsWith("* ")) {
         formattedLine = "• " + formattedLine.slice(2);
       }
-  
-      const wrapped = doc.splitTextToSize(formattedLine, 180);
-      doc.text(wrapped, 15, y);
-      y += wrapped.length * 7;
-    });
 
+      if (formattedLine.startsWith("## ")) {
+        formattedLine = "———— " + formattedLine.slice(3) + " ————";
+      }
+  
+      const wrappedLines = doc.splitTextToSize(formattedLine, 180);
+  
+      wrappedLines.forEach((wrappedLine: string, index: number) => {
+        if (y + lineHeight > usableHeight) {
+          doc.addPage();
+          y = marginTop;
+      
+          doc.setFillColor(240, 248, 240);
+          doc.roundedRect(10, 15, 190, 270, 5, 5, 'F');
+      
+          doc.setFontSize(12);
+          doc.setTextColor(0, 0, 0);
+        }
+      
+        doc.text(wrappedLine, 15, y);
+        y += lineHeight;
+      });
+         
+    });
+  
     const pdfBlob = doc.output("blob");
     setPdfFile(pdfBlob);
   }
+  
 
   function restartAssessment() {
     localStorage.removeItem("detailedAssessmentProgress");
