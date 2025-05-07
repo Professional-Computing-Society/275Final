@@ -2,6 +2,26 @@
   text-align: center;
 }
 
+.logo-container {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  background-color: transparent;
+  padding: 0;
+  border-radius: 10px;
+}
+
+.site-logo {
+  width: 130px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.site-logo:hover {
+  transform: scale(1.1);
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
