@@ -41,8 +41,12 @@ function App() {
 
   return (
     <div className="App">
+      <div className="cloud-container">
+        <img src="/cloud-1.png" className="cloud cloud1" alt="cloud" />
+        <img src="/cloud-1.png" className="cloud cloud2" alt="cloud" />
+      </div>
       <header className={`App-header ${isAssessmentPage ? 'assessment-page' : ''}`}>
-        <h1 className="fancy-title">Career-Helpi</h1>
+        <h1 className="fancy-title">Career Cloud</h1>
         <div className="divider" />
 
         {/* Back/Home navigation when inside an assessment */}
