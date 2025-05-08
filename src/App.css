@@ -73,7 +73,7 @@
   border: 1px solid rgba(249, 249, 249, 0.4);
   border-radius: 2px;
   margin: 50px 0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 .App-link {
@@ -134,7 +134,7 @@ h1 {
 .fancy-title {
   font-size: 3.2rem;
   font-weight: bold;
-  background: linear-gradient(90deg,rgb(23, 68, 157), rgb(67, 124, 255), rgb(56, 114, 250));
+  background: linear-gradient(90deg,rgb(33, 68, 148), rgb(91, 139, 252), rgb(33, 68, 148));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
@@ -192,11 +192,11 @@ h1 {
   position: absolute;
   top: 35%;
   left: 50%;
-  border: 3px solid rgb(255, 255, 255);
+  border: 3px solid rgba(0, 0, 0, 0.3);
   transform: translateX(-50%);
   max-width: 600px;
   text-align: center;
-  background: linear-gradient(90deg,rgba(255, 255, 255, 0.46),rgba(58, 153, 255, 0.62), rgba(254, 254, 254, 0.46));
+  background: linear-gradient(90deg,rgba(255, 255, 255, 0.46),rgb(198, 222, 255), rgba(254, 254, 254, 0.46));
   padding: 30px 35px;
   border-radius: 20px;
   box-shadow: 0 12px 30px rgba(0, 157, 255, 0.76);
@@ -234,12 +234,12 @@ h1 {
   font-weight: 600;
   color: #4CAF50;
   margin-bottom: 30px;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.44);
   backdrop-filter: blur(10px);
   display: inline-block;
   padding: 10px 30px;
   border-radius: 30px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.26);
   animation: fadeSlideUp 0.8s ease-out;
 }
 
